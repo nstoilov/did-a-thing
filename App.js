@@ -6,7 +6,7 @@ import ChartScreen from './screens/ChartScreen';
 
 
 export default class App extends React.Component {
-//change this to test screen flows
+  //change this to test screen flows
   state = { thing: null };
 
   render() {
@@ -21,7 +21,7 @@ export default class App extends React.Component {
 
           },
             {
-              swipeEnabled: false,              
+              swipeEnabled: false,
               lazy: true,
               animationEnabled: false,
               navigationOptions: {
@@ -48,8 +48,7 @@ export default class App extends React.Component {
             edit: { screen: EditScreen }
           },
             {
-              swipeEnabled: false,             
-              lazy: true, // Each screen will not mount/load until user clicks on them
+              swipeEnabled: false,
               animationEnabled: false,
               navigationOptions: {
                 tabBarVisible: false
@@ -57,9 +56,8 @@ export default class App extends React.Component {
             })
         }
       },
-        { 
+        {
           swipeEnabled: false,
-          lazy: true, // Each screen will not mount/load until user clicks on them
           animationEnabled: false,
           navigationOptions: {
             tabBarVisible: false
