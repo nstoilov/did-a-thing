@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
+
 class WelcomeScreen extends Component {
     render() {
         return (
-            <View style={styles.containerStyle}>
+ <View style={styles.containerStyle}>
                 <Text style={styles.textStyle}>
                     Welcome Screen
                 </Text>
@@ -49,3 +50,4 @@ const styles = {
 };
 
 export default WelcomeScreen;
+

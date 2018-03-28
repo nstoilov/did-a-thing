@@ -1,73 +1,21 @@
-import React from 'react';
-import { TabNavigator } from 'react-navigation';
-import WelcomeScreen from './screens/WelcomeScreen';
-import EditScreen from './screens/EditScreen';
-import ChartScreen from './screens/ChartScreen';
+import React, { Component } from 'react';
 
+import { Subscribe, Provider } from 'unstated';
+import { StateContainer } from './StateContainer';
+import AppContainer from './AppContainer';
 
-export default class App extends React.Component {
-  //change this to test screen flows
-  state = { thing: null };
-
+export default class App extends Component {
   render() {
-    let MainNavigator = null;
-
-    if (this.state.thing) {
-      MainNavigator = TabNavigator({
-        main: {
-          screen: TabNavigator({
-            chart: { screen: ChartScreen },
-            edit: { screen: EditScreen }
-
-          },
-            {
-              swipeEnabled: false,
-              lazy: true,
-              animationEnabled: false,
-              navigationOptions: {
-                tabBarVisible: false
-              }
-            })
-        }
-      },
-        {
-          swipeEnabled: false,
-          lazy: true,
-          animationEnabled: false,
-          navigationOptions: {
-            tabBarVisible: false
-          }
-        }
-      );
-    } else {
-      MainNavigator = TabNavigator({
-        main: {
-          screen: TabNavigator({
-            welcome: { screen: WelcomeScreen },
-            chart: { screen: ChartScreen },
-            edit: { screen: EditScreen }
-          },
-            {
-              swipeEnabled: false,
-              animationEnabled: false,
-              navigationOptions: {
-                tabBarVisible: false
-              }
-            })
-        }
-      },
-        {
-          swipeEnabled: false,
-          animationEnabled: false,
-          navigationOptions: {
-            tabBarVisible: false
-          }
-        }
-      );
-    }
-
     return (
-      <MainNavigator />
+      <Provider>
+        <Subscribe to={[StateContainer]}>
+          {(stateStore) => (
+            <AppContainer
+              stateStore={stateStore}
+            />
+          )}
+      </Subscribe>
+    </Provider>
     );
   }
 }
