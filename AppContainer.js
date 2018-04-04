@@ -1,22 +1,28 @@
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
+import { AsyncStorage } from 'react-native';
 import WelcomeScreen from './screens/WelcomeScreen';
 import EditScreen from './screens/EditScreen';
 import ChartScreen from './screens/ChartScreen';
 
-
 export default class AppContainer extends React.Component {
-  //change this to test screen flows
-  //state = { thing: null };
+  state = { token: null };
 
-  componentDidMount() {
-    console.log('this.props.stateStore.state: ', this.props.stateStore.state);
+  async componentWillMount() {
+    AsyncStorage.removeItem('token');
+    // eslint-disable-next-line 
+    let token = await AsyncStorage.getItem('token');
+    if (token) {
+      this.setState({ token: true });
+    } else {
+      this.setState({ token: false });
+    }
   }
 
   render() {
     let MainNavigator = null;
 
-    if (this.props.stateStore.state.thing) {
+    if (this.state.token) {
       MainNavigator = TabNavigator({
         main: {
           screen: TabNavigator({

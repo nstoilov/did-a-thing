@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 
 
 class WelcomeScreen extends Component {
+
+    onPress = async () => {
+        await AsyncStorage.setItem('token', 'true');
+        this.props.navigation.navigate('edit');
+    }
+
     render() {
         return (
- <View style={styles.containerStyle}>
+            <View style={styles.containerStyle}>
                 <Text style={styles.textStyle}>
-                    Welcome Screen
+                    Welcome!
                 </Text>
                 <View
                     style={styles.buttonContainerStyle}
                 >
-                < Button
-                    title='Add thing'
-                    color='black'
-                    buttonStyle={styles.buttonStyle}
-                    onPress={() => this.props.navigation.navigate('edit')}
-                />
+                    < Button
+                        title='Add thing'
+                        color='black'
+                        buttonStyle={styles.buttonConfirmStyle}
+                        onPress={() => this.onPress()}
+                    />
                 </View>
             </View>
         );
@@ -37,9 +43,9 @@ const styles = {
     },
     buttonContainerStyle: {
         flexDirection: 'row',
-        justifyContent: 'center'        
+        justifyContent: 'center'
     },
-    buttonStyle: {
+    buttonConfirmStyle: {
         backgroundColor: 'white',
         width: 200,
         height: 55,
@@ -50,4 +56,3 @@ const styles = {
 };
 
 export default WelcomeScreen;
-
